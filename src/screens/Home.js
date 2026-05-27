@@ -33,6 +33,30 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
     setLoading(false);
   };
 
+  
+  const placeOrder = async () => {
+    if (!selectedStore) return showToast('Please select a store first');
+    if (cart.length === 0) return showToast('Cart is empty');
+    try {
+      const items = cart.map(i => ({
+        product_id: i.id,
+        quantity: i.qty,
+        unit_price: Number(i.retail_price),
+        wholesaler_id: null
+      }));
+      await orders.create({
+        buyer_id: user.id,
+        store_id: selectedStore.id,
+        items
+      });
+      setCart([]);
+      showToast('Order placed! Collect at ' + selectedStore.store_name);
+      setScreen('orders');
+    } catch(e) {
+      showToast('Error: ' + (e.response?.data?.error || e.message || 'Failed'));
+    }
+  };
+
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 2500); };
   const subtotal = cart.reduce((a, b) => a + (Number(b.retail_price) * b.qty), 0);
   const total = subtotal * 0.88;
