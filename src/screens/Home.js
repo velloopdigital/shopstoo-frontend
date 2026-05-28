@@ -141,7 +141,7 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
             <div style={{display:'flex',justifyContent:'space-between',fontSize:13,marginBottom:6}}><span style={{color:'#4A3728'}}>Saving (12%)</span><span style={{color:'#00875A'}}>-{formatPrice(subtotal*0.12,userCountry)}</span></div>
             <div style={{display:'flex',justifyContent:'space-between',fontWeight:700,borderTop:'1px solid #E8DDD4',paddingTop:8}}><span>Total</span><span style={{color:'#C8541A',fontSize:16}}>{formatPrice(total,userCountry)}</span></div>
           </div>
-          <button onClick={placeOrder} disabled={placingOrder} style={{width:'100%',height:52,background:placingOrder?'#9C8878':'#C8541A',color:'#fff',border:'none',borderRadius:14,fontSize:16,fontWeight:700,cursor:placingOrder?'not-allowed':'pointer'}}>
+          <button onClick={() => { alert("Button works!"); placeOrder(); }} disabled={placingOrder} style={{width:'100%',height:52,background:placingOrder?'#9C8878':'#C8541A',color:'#fff',border:'none',borderRadius:14,fontSize:16,fontWeight:700,cursor:placingOrder?'not-allowed':'pointer'}}>
             {placingOrder ? 'Placing Order...' : 'Confirm Order · ' + formatPrice(total,userCountry) + ' →'}
           </button>
         </>)}
