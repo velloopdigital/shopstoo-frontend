@@ -58,7 +58,7 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
       await loadOrders();
       setScreen('orders');
     } catch(e) {
-      console.error('Order error:', e, e.response?.data); showToast('Error: ' + (e.response?.data?.error || e.message || 'Failed'));
+      console.error('Order error:', e, e.response?.data); showToast('ERR: ' + (e.response?.data?.error || e.message || JSON.stringify(e).slice(0,80)));
     }
     setPlacingOrder(false);
   };
