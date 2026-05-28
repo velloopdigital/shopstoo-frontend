@@ -27,6 +27,7 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
       const [p, st] = await Promise.all([products.getAll(), stores.getAll()]);
       const allP = p.data.products || [];
       const allS = st.data.stores || [];
+      const myStores = allS.filter(x => !x.country || x.country === userCountry);
       setStoreList(myStores);
     } catch (err) { showToast('Could not load'); }
     setLoading(false);
