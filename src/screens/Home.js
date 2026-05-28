@@ -43,6 +43,7 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
   const placeOrder = async () => {
     if (cart.length === 0) return showToast('Cart is empty');
     if (placingOrder) return;
+    console.log("placeOrder called", {selectedStore, cart, user});
     setPlacingOrder(true);
     try {
       const items = cart.map(i => ({
@@ -57,7 +58,7 @@ export default function Home({ user, cart, cartCount, addToCart, setCart, select
       await loadOrders();
       setScreen('orders');
     } catch(e) {
-      showToast('Error: ' + (e.response?.data?.error || e.message || 'Failed'));
+      console.error('Order error:', e, e.response?.data); showToast('Error: ' + (e.response?.data?.error || e.message || 'Failed'));
     }
     setPlacingOrder(false);
   };
